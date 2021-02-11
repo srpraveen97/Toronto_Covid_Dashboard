@@ -231,15 +231,6 @@ app.layout = dbc.Container([
 
 def update_graph( outcome_ , daily_ , agegroup_):
     
-    print(outcome_)
-    print(type(outcome_))
-    
-    print(daily_)
-    print(type(daily_))
-    
-    print(agegroup_)
-    print(type(agegroup_))
-    
     string1 = 'Confirmed Cases: {}'.format(confirmed_cases)
     string2 = 'Probable Cases: {}'.format(probable_cases)
     string3 = 'Active Cases: {}'.format(active_cases)
