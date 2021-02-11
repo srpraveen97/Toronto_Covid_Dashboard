@@ -119,7 +119,7 @@ app.layout = dbc.Container([
     
     dbc.Row([
         
-        dbc.Col(html.H1("Real-time Covid-19 case tracker (Toronto)",
+        dbc.Col(html.H1("Tracking Covid-19 cases in Toronto",
                         className = 'text-center text-uppercase, mb-4'),
                 width = 12)
         
@@ -175,6 +175,7 @@ app.layout = dbc.Container([
         
         dbc.Col([
             
+            html.H4('Distribution of Covid-19 cases in Toronto'),
             dcc.RadioItems(id='fsa_map', value='TOTAL',
                          options=option, className='text-light', labelStyle={'display': 'inline-block'},
                          labelClassName = 'mr-3'),
@@ -184,6 +185,7 @@ app.layout = dbc.Container([
         
         dbc.Col([
             
+            html.H4('Covid-19 progression over time'),
             dcc.RadioItems(id='daily_cases', value='TOTAL',
                          options=option1, className='text-light', labelStyle={'display': 'inline-block'},
                          labelClassName = 'mr-3'),
@@ -197,7 +199,8 @@ app.layout = dbc.Container([
     dbc.Row([
         
         dbc.Col([
-
+            
+            html.H4('Source of Infection for various Age Groups'),
             dcc.Dropdown(id='contact_mode',multi=False, value='ALL',
                          options=option2, className='text-dark'),
             dcc.Graph(id='lineplot', figure={})
@@ -206,6 +209,7 @@ app.layout = dbc.Container([
         
         dbc.Col([
             
+            html.H4('Total cases and fatality for different Age Groups'),
             dcc.Graph(id='static', figure={})
             ], #width = {'size':5}
             xs = 12, sm =12, md = 12, lg = 5, xl = 5)
@@ -276,7 +280,6 @@ def update_graph( outcome_ , daily_ , agegroup_):
     fig2.update_yaxes(title_text="Total Cases")
     fig2.update_xaxes(title_text="Date reported")
     
-    fig2.update_layout(title="Daily case count")
     
     if agegroup_ == 'ALL':
         df3 = data.copy()
@@ -300,7 +303,6 @@ def update_graph( outcome_ , daily_ , agegroup_):
     fig3.update_yaxes(title_text="Total Cases")
     fig3.update_xaxes(title_text="Source of Infection")
     
-    fig3.update_layout(title="Total cases based on source of infection")
     
     fig4 = make_subplots(specs=[[{"secondary_y": True}]])
 
@@ -324,7 +326,7 @@ def update_graph( outcome_ , daily_ , agegroup_):
     fig4.update_yaxes(title_text="Fatal Cases", secondary_y=True)
     fig4.update_xaxes(title_text="Age Group")
     
-    fig4.update_layout(template="simple_white", title="Total and Fatal cases for various Age groups")
+    fig4.update_layout(template="simple_white")
     
     return string1,string2,string3,string4,string5,fig1,fig2,fig3,fig4
     
