@@ -333,7 +333,7 @@ def update_graph( outcome_ , daily_ , agegroup_):
     
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=3000)
+    app.run_server(debug=True)
     
     
     
