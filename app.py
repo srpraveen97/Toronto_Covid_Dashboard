@@ -117,6 +117,20 @@ server = app.server
 
 app.layout = dbc.Container([
     
+     dbc.Row([
+        
+        dbc.Col(html.H6(id="last-update", children=[],
+                        className = 'text-center, mb-4'),
+                width={"size": 2,'offset':1}),
+        
+        dbc.Col(dcc.Link(id='data-source',
+                          href="https://open.toronto.ca/dataset/covid-19-cases-in-toronto/",
+                        className = 'text-center, mb-4'),
+                width = {"size": 4,'offset':5}),
+        
+            ]),
+    
+    
     dbc.Row([
         
         dbc.Col(html.H1("Tracking Covid-19 cases in Toronto",
@@ -223,7 +237,8 @@ app.layout = dbc.Container([
 # ----------------------------------------------------------------------------
 
 @app.callback(
-    [Output('card-conf','children'), Output('card-prob','children'), Output('card-act','children'),
+    [Output('data-source','children'),Output('last-update','children'),Output('card-conf','children'), 
+     Output('card-prob','children'), Output('card-act','children'),
       Output('card-fat','children'), Output('card-res','children'), Output('map','figure'),
       Output('timeseries','figure'), Output('lineplot','figure'), Output('static','figure')],
     [Input('fsa_map','value'), Input('daily_cases','value'),Input('contact_mode','value')]
@@ -231,6 +246,7 @@ app.layout = dbc.Container([
 
 def update_graph( outcome_ , daily_ , agegroup_):
     
+    string0 = 'Last updated on: ' + data['Reported Date'].iloc[-1]
     string1 = 'Confirmed Cases: {}'.format(confirmed_cases)
     string2 = 'Probable Cases: {}'.format(probable_cases)
     string3 = 'Active Cases: {}'.format(active_cases)
@@ -319,7 +335,7 @@ def update_graph( outcome_ , daily_ , agegroup_):
     
     fig4.update_layout(template="simple_white")
     
-    return string1,string2,string3,string4,string5,fig1,fig2,fig3,fig4
+    return dash.no_update,string0,string1,string2,string3,string4,string5,fig1,fig2,fig3,fig4
     
     
 
